@@ -1,7 +1,7 @@
 #Tune the clock to 80MHz
 w 7f 00; # page 0x0
 w 04 04; # tune the OSC clock
-w 07 xx; # depending the freq setting
+w 07 AA; # depending the freq setting
 
 
 #Temperature Measurement

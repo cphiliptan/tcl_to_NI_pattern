@@ -7,10 +7,6 @@ import numpy as np
 import pandas as pd
 import re
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
 
 def open_file(file_name):
     print(f'Opening File: {file_name}')
@@ -21,13 +17,13 @@ def open_file(file_name):
     count = 0
 
     line_list = []
+    cmd_add_data_list = []
+
     # Strips the newline character
     for line in all_lines:
         count += 1
         line = line.strip()
 
-        # pattern = r"^[wW]"
-        # pattern = r"^[wW]"
         pattern = r"^[wW]\s+(\w+)\s+(\w+);"
 
         match = re.search(pattern, line)
@@ -35,9 +31,12 @@ def open_file(file_name):
             line_list.append(line)
             print(line)
 
-            arg1 = match.group(1)
-            arg2 = match.group(2)
-            print(f"1st argument: {arg1}, 2nd argument: {arg2}")
+            arg1 = hex(int(match.group(1), 16))
+            arg2 = hex(int(match.group(2), 16))
+            print(f"{arg1} {arg2}\n")
+
+            cmd_add_data = ["w", arg1, arg2]
+            cmd_add_data_list.append(cmd_add_data)
 
 
 # Press the green button in the gutter to run the script.
