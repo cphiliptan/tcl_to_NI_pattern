@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 import re
 
+cmd_add_data_list = []
+
 
 def open_file(file_name):
     print(f'Opening File: {file_name}')
@@ -17,7 +19,7 @@ def open_file(file_name):
     count = 0
 
     line_list = []
-    cmd_add_data_list = []
+    # cmd_add_data_list = []
 
     # Strips the newline character
     for line in all_lines:
@@ -33,14 +35,14 @@ def open_file(file_name):
 
             arg1 = hex(int(match.group(1), 16))
             arg2 = hex(int(match.group(2), 16))
-            print(f"{arg1} {arg2}\n")
+            # print(f"{arg1} {arg2}\n")
 
-            cmd_add_data = ["w", arg1, arg2]
-            cmd_add_data_list.append(cmd_add_data)
+            cmd_add_data_list.append(["w", arg1, arg2])
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     open_file('TS_test.tcl')
+    print(*cmd_add_data_list, sep="\n")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
