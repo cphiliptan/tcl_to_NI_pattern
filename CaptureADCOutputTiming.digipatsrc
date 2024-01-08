@@ -1,0 +1,11 @@
+
+file_format_version 1.1;
+timeset tset0;
+
+pattern CaptureADCOutputTimingPattern (ClkOut, DOut)
+{
+capture_start(CaptureADCOutputTiming)		tset0		X		XXXXXXXXXXXXXXXX;
+repeat(20200), capture				tset0		V		VVVVVVVVVVVVVVVV;
+capture_stop						tset0		X		XXXXXXXXXXXXXXXX;
+halt								tset0		X		XXXXXXXXXXXXXXXX;
+}

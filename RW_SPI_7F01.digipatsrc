@@ -1,0 +1,54 @@
+
+file_format_version 1.1;
+timeset tset_SPI, tRead;
+
+pattern RW_SPI_7F01 (_3, _0, _1, _2)
+{
+									tset_SPI	1		1		0		X;		// NCS, SCLK, MOSI, MISO
+									tset_SPI	0		1		0		X;
+
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+
+									tRead		0		1		X		X;
+
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		1		X;
+
+									tRead		0		1		X		X;
+
+									tset_SPI	0		0		0		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+									tset_SPI	0		0		1		X;
+
+									tRead		0		1		X		X;
+
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		L;
+									tset_SPI	0		0		X		H;
+
+									tset_SPI	0		1		X		X;
+halt								tset_SPI	1		1		X		X;
+}
