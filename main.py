@@ -33,8 +33,8 @@ def open_file(file_name):
             line_list.append(line)
             print(line)
 
-            arg1 = hex(int(match.group(1), 16))
-            arg2 = hex(int(match.group(2), 16))
+            arg1 = int(match.group(1), 16)
+            arg2 = int(match.group(2), 16)
             # print(f"{arg1} {arg2}\n")
 
             cmd_add_data_list.append(["w", arg1, arg2])
@@ -44,5 +44,50 @@ def open_file(file_name):
 if __name__ == '__main__':
     open_file('TS_test.tcl')
     print(*cmd_add_data_list, sep="\n")
+
+    action = cmd_add_data_list[0][0]
+    address = cmd_add_data_list[0][1]
+    data = cmd_add_data_list[0][2]
+
+    # write function
+    out_string = ""
+    NCS  = 0
+    SCLK = 0
+    MOSI = 0
+    MISO = "X"
+    print(f"// write to address: 0x{address:02x} | 0x80")
+    address = address | 0x80
+    for bit in range(7, -1, -1):  # 7 to 0
+        MOSI = address & pow(2, bit) >> bit
+        # NCS SCLK MOSI MISO
+        out_string = ("tset_SPI" + "\t" +
+                      str(NCS) + "\t" +
+                      str(SCLK) + "\t" +
+                      str(MOSI) + "\t" +
+                      str(MISO) + ";")
+        print(out_string)
+
+    SCLK = 1
+    out_string = ("tRead" + "\t\t" +
+                  str(NCS) + "\t" +
+                  str(SCLK) + "\t" +
+                  str(MOSI) + "\t" +
+                  str(MISO) + ";")
+    print(out_string)
+
+    SCLK = 0
+    print(f"// write data: 0x{data:02x} ")
+    for bit in range(7, -1, -1):  # 7 to 0
+        MOSI = data & pow(2, bit) >> bit
+        # NCS SCLK MOSI MISO
+        out_string = ("tset_SPI" + "\t" +
+                      str(NCS) + "\t" +
+                      str(SCLK) + "\t" +
+                      str(MOSI) + "\t" +
+                      str(MISO) + ";")
+        print(out_string)
+
+
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
