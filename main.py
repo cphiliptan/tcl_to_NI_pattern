@@ -355,7 +355,12 @@ def convert_tcl_to_pattern(file__name):
 
     print('}\n')
 
-    print(store_print_to_var(False, buffer))
+    file_output = store_print_to_var(False, buffer)
+    print(file_output)
+
+    file_output_name = base_name + '.digipatsrc'
+    with open(file_output_name, 'w') as f:
+        f.write(file_output)
 
     # print_output = buffer.getvalue()  # store print value to this var
     # sys.stdout = sys.__stdout__  # restore stdout to default for print()
@@ -365,7 +370,16 @@ def convert_tcl_to_pattern(file__name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    file_name = 'TS_test.tcl'
+
+    file_name = ''
+    if len(sys.argv) > 1:
+        print(sys.argv[1])
+        file_name = sys.argv[1]
+        pass
+    else:
+        file_name = 'TS_test.tcl'
+        pass
+
     convert_tcl_to_pattern(file_name)
 
     pass
