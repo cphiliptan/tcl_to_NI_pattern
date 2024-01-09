@@ -117,9 +117,10 @@ def read_spi(add, m_data):
                   str(miso) + ";")
     print(out_string)
     sclk = 0
+    mosi = 0
     print(f"// read data: 0x{m_data:02x} ")
     for bit in range(7, -1, -1):  # 7 to 0
-        mosi = (m_data & pow(2, bit)) >> bit
+        miso = (m_data & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
         out_string = ("tset_SPI" + "\t" +
                       str(ncs) + "\t" +
