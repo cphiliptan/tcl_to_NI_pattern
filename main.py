@@ -6,6 +6,7 @@
 # import numpy as np
 # import pandas as pd
 import re
+import os
 
 cmd_add_data_list = []
 tset_SPI: float = 250e-6
@@ -34,7 +35,7 @@ def open_file(file_name):
         match = re.search(pattern, line)
         if match:
             line_list.append(line)
-            print("//" + line)
+            print("// " + line)
 
             arg1 = int(match.group(1), 16)
             arg2 = int(match.group(2), 16)
@@ -46,7 +47,7 @@ def open_file(file_name):
         match = re.search(pattern, line)
         if match:
             line_list.append(line)
-            print("//" + line)
+            print("// " + line)
 
             arg1 = int(match.group(1), 16)
             arg2 = int(match.group(2), 16)
@@ -58,7 +59,7 @@ def open_file(file_name):
         match = re.search(pattern, line, re.IGNORECASE)
         if match:
             line_list.append(line)
-            print("//" + line)
+            print("// " + line)
 
             arg1 = int(match.group(1), 16)
             arg2 = 0
@@ -309,12 +310,12 @@ def halt_spi():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    open_file('TS_test.tcl')
+    file_name = 'TS_test.tcl'
+    base_name, ext_name = os.path.splitext(file_name)
+    open_file(file_name)
     # print(*cmd_add_data_list, sep="\n")
 
-    action = cmd_add_data_list[0][0]
-    address = cmd_add_data_list[0][1]
-    data = cmd_add_data_list[0][2]
+    print(f'pattern {base_name}(_3, _0, _1, _2)')
 
     print('// tset_SPI:', tset_SPI * 1e6, 'nS')
     print('// tRead:', tRead * 1e6, 'nS')
