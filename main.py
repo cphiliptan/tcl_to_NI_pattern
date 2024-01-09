@@ -7,6 +7,8 @@
 # import pandas as pd
 import re
 import os
+from io import StringIO
+import sys
 
 cmd_add_data_list = []
 tset_SPI: float = 250e-6
@@ -312,12 +314,29 @@ def halt_spi():
     print(out_string)
 
 
+def store_print_to_var(enable, _buffer):
+    print_output = ''
+
+    if enable:
+        sys.stdout = _buffer
+    else:
+        print_output = _buffer.getvalue()  # store print value to this var
+        sys.stdout = sys.__stdout__  # restore stdout to default for print()
+
+    return print_output
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     file_name = 'TS_test.tcl'
     base_name, ext_name = os.path.splitext(file_name)
     open_file(file_name)
     # print(*cmd_add_data_list, sep="\n")
+
+    # buffer = StringIO()
+    # sys.stdout = buffer
+    buffer = StringIO()
+    store_print_to_var(True, buffer)
 
     print(f'file_format_version {file_format_version};')
     print(f'timeset {timeset};')
@@ -337,6 +356,12 @@ if __name__ == '__main__':
     halt_spi()
 
     print('}\n')
+
+    print(store_print_to_var(False, buffer))
+
+    # print_output = buffer.getvalue()  # store print value to this var
+    # sys.stdout = sys.__stdout__  # restore stdout to default for print()
+    # print(print_output)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
