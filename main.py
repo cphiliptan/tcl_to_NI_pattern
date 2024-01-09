@@ -70,11 +70,42 @@ def open_file(file_name):
 def write_spi(add, m_data):
     # write function
     # out_string = ""
+
+    print(f"// write to address: 0x{add:02x} | 0x80")
+
+    # NCS setup start
+    ncs = 1
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = (time_set_name + "\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
+    ncs = 0
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = ("\t\t\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+    # NCS setup end
+
     ncs = 0
     sclk = 0
     mosi = 0
     miso = "X"
-    print(f"// write to address: 0x{add:02x} | 0x80")
+
     wr_address = add | 0x80
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (wr_address & pow(2, bit)) >> bit
@@ -88,13 +119,13 @@ def write_spi(add, m_data):
                       str(mosi) + "\t" +
                       str(miso) + ";")
         print(out_string)
-    sclk = 1
-    out_string = ("tRead" + "\t\t" +
-                  str(ncs) + "\t" +
-                  str(sclk) + "\t" +
-                  str(mosi) + "\t" +
-                  str(miso) + ";")
-    print(out_string)
+    # sclk = 1
+    # out_string = ("tRead" + "\t\t" +
+    #               str(ncs) + "\t" +
+    #               str(sclk) + "\t" +
+    #               str(mosi) + "\t" +
+    #               str(miso) + ";")
+    # print(out_string)
     sclk = 0
     print(f"// write data: 0x{m_data:02x} ")
     for bit in range(7, -1, -1):  # 7 to 0
@@ -110,17 +141,73 @@ def write_spi(add, m_data):
                       str(miso) + ";")
         print(out_string)
 
+    ncs = 0
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = (time_set_name + "\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
+    ncs = 1
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = ("\t\t\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
 
 def read_spi(add, m_data):
     # write function
     # out_string = ""
+
+    print(f"// read address: 0x{add:02x}")
+    # wr_address = add | 0x80
+    wr_address = add
+
+    # NCS setup start
+    ncs = 1
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = (time_set_name + "\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
+    ncs = 0
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = ("\t\t\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+    # NCS setup end
+
     ncs = 0
     sclk = 0
     mosi = 0
     miso = "X"
-    print(f"// read address: 0x{add:02x}")
-    # wr_address = add | 0x80
-    wr_address = add
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (wr_address & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
@@ -160,6 +247,32 @@ def read_spi(add, m_data):
                       str(miso) + ";")
         print(out_string)
 
+    ncs = 0
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = (time_set_name + "\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
+    ncs = 1
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    repeat_num = 2
+    time_set_name = 'tset_SPI'
+    out_string = ("\t\t\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
 
 def wait_spi(wait_time_ms):
     # write function
@@ -172,6 +285,21 @@ def wait_spi(wait_time_ms):
 
     print(f"// wait_time: {wait_time_ms:d} repeat: {repeat_num:d}")
     out_string = (f'repeat({repeat_num})' + "\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
+
+def halt_spi():
+    # write function
+    # out_string = ""
+    ncs = 1
+    sclk = 1
+    mosi = 0
+    miso = "X"
+    out_string = ('halt' + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -198,6 +326,8 @@ if __name__ == '__main__':
             read_spi(cmd[1], cmd[2])
         if cmd[0] == 'wait':
             wait_spi(cmd[1])
+
+    halt_spi()
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
