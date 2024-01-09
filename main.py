@@ -326,11 +326,9 @@ def store_print_to_var(enable, _buffer):
     return print_output
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    file_name = 'TS_test.tcl'
-    base_name, ext_name = os.path.splitext(file_name)
-    open_file(file_name)
+def convert_tcl_to_pattern(file__name):
+    base_name, ext_name = os.path.splitext(file__name)
+    open_file(file__name)
     # print(*cmd_add_data_list, sep="\n")
 
     # buffer = StringIO()
@@ -362,6 +360,15 @@ if __name__ == '__main__':
     # print_output = buffer.getvalue()  # store print value to this var
     # sys.stdout = sys.__stdout__  # restore stdout to default for print()
     # print(print_output)
+    pass
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    file_name = 'TS_test.tcl'
+    convert_tcl_to_pattern(file_name)
+
+    pass
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
