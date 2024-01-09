@@ -64,7 +64,10 @@ def write_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (wr_address & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        out_string = ("tset_SPI" + "\t" +
+        time_set_name = '\t\t'
+        if bit == 7:
+            time_set_name = 'tset_SPI'
+        out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
                       str(mosi) + "\t" +
@@ -82,7 +85,10 @@ def write_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (m_data & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        out_string = ("tset_SPI" + "\t" +
+        time_set_name = '\t\t'
+        if bit == 7:
+            time_set_name = 'tset_SPI'
+        out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
                       str(mosi) + "\t" +
@@ -103,7 +109,10 @@ def read_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (wr_address & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        out_string = ("tset_SPI" + "\t" +
+        time_set_name = '\t\t'
+        if bit == 7:
+            time_set_name = 'tset_SPI'
+        out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
                       str(mosi) + "\t" +
@@ -122,7 +131,10 @@ def read_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         miso = (m_data & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        out_string = ("tset_SPI" + "\t" +
+        time_set_name = '\t\t'
+        if bit == 7:
+            time_set_name = 'tset_SPI'
+        out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
                       str(mosi) + "\t" +
