@@ -12,12 +12,14 @@ cmd_add_data_list = []
 tset_SPI: float = 250e-6
 tRead: float = 100e-6
 tWait: float = 100e-6
+file_format_version: float = 1.1
+timeset = 'tset_SPI, tRead, tWait'
 
 
-def open_file(file_name):
-    print(f'// Opening File: {file_name}')
+def open_file(file_name_):
+    print(f'// Opening File: {file_name_}')
 
-    file1 = open(file_name, 'r')
+    file1 = open(file_name_, 'r')
     all_lines = file1.readlines()
 
     count = 0
@@ -283,9 +285,11 @@ def wait_spi(wait_time_ms):
     mosi = 0
     miso = "X"
     repeat_num = int(wait_time_ms / tWait)
+    time_set_name = 'tWait'
 
     print(f"// wait_time: {wait_time_ms:d} repeat: {repeat_num:d}")
     out_string = (f'repeat({repeat_num})' + "\t" +
+                  time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -315,7 +319,9 @@ if __name__ == '__main__':
     open_file(file_name)
     # print(*cmd_add_data_list, sep="\n")
 
-    print(f'pattern {base_name}(_3, _0, _1, _2)')
+    print(f'file_format_version {file_format_version};')
+    print(f'timeset {timeset};')
+    print(f'pattern {base_name}(_3, _0, _1, _2)' + '\n{')
 
     print('// tset_SPI:', tset_SPI * 1e6, 'nS')
     print('// tRead:', tRead * 1e6, 'nS')
@@ -329,6 +335,8 @@ if __name__ == '__main__':
             wait_spi(cmd[1])
 
     halt_spi()
+
+    print('}\n')
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
