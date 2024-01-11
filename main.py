@@ -9,6 +9,7 @@ import re
 import os
 from io import StringIO
 import sys
+from pathlib import Path
 
 cmd_add_data_list = []
 tset_SPI: float = 250e-9
@@ -333,7 +334,8 @@ def store_print_to_var(enable, _buffer):
 
 
 def convert_tcl_to_pattern(file__name):
-    base_name, ext_name = os.path.splitext(file__name)
+    # base_name, ext_name = os.path.splitext(file__name)
+    base_name = Path(file__name).stem
     open_file(file__name)
     # print(*cmd_add_data_list, sep="\n")
 
