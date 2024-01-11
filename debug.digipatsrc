@@ -4,7 +4,32 @@ pattern debug(_3, _0, _1, _2)
 {
 // tset_SPI: 250.0 nS
 // tRead: 100.0 nS
+// tWait: 500.0 nS
 //NCS	SCLK	MOSI	MISO
+// write to address: 0x3a | 0x80
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+// write data: 0x5a 
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// wait_time_ms: 10.0 repeat: 20000 tWait_ns: 500.0
+repeat(20000)	tWait	1	1	0	X;
 // write to address: 0x7f | 0x80
 tset_SPI	1	1	0	X;
 tset_SPI	0	1	0	X;
@@ -50,70 +75,257 @@ tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
 tset_SPI	0	1	0	X;
 tset_SPI	1	1	0	X;
-// read address: 0x08
+// read address: 0x00
 tset_SPI	1	1	0	X;
 tset_SPI	0	1	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
-tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tRead		0	1	0	X;
-// read data: 0x48 
-tset_SPI	0	0	0	L;
+// read data: 0xf1 
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	H;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x03
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x03 
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
 tset_SPI	0	1	0	X;
 tset_SPI	1	1	0	X;
-// write to address: 0x08 | 0x80
+// write to address: 0x7f | 0x80
 tset_SPI	1	1	0	X;
 tset_SPI	0	1	0	X;
 tset_SPI	0	0	1	X;
-tset_SPI	0	0	0	X;
-tset_SPI	0	0	0	X;
-tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
-tset_SPI	0	0	0	X;
-tset_SPI	0	0	0	X;
-tset_SPI	0	0	0	X;
-// write data: 0x4b 
-tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
-tset_SPI	0	0	0	X;
-tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
-tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+// write data: 0x01 
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	1	0	X;
 tset_SPI	1	1	0	X;
-// read address: 0x08
+// read address: 0x7f
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x01 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// wait_time_ms: 10.0 repeat: 20000 tWait_ns: 500.0
+repeat(20000)	tWait	1	1	0	X;
+// read address: 0x00
 tset_SPI	1	1	0	X;
 tset_SPI	0	1	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
-tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tRead		0	1	0	X;
-// read data: 0x4b 
-tset_SPI	0	0	0	L;
+// read data: 0xf1 
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x03
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x1a 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// write to address: 0x7f | 0x80
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+// write data: 0x02 
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x7f
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x02 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// wait_time_ms: 10.0 repeat: 20000 tWait_ns: 500.0
+repeat(20000)	tWait	1	1	0	X;
+// read address: 0x00
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tRead		0	1	0	X;
+// read data: 0xf1 
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x10
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tRead		0	1	0	X;
+// read data: 0xfc 
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x11
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x3f 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	H;
 tset_SPI	0	1	0	X;
