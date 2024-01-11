@@ -59,13 +59,14 @@ def open_file(file_name_):
 
             cmd_add_data_list.append(["r", arg1, arg2])
 
-        pattern = r"wait\s+(\d+);"
+        pattern = r"wait\s+([-+]?([0-9]*\.[0-9]+|[0-9]+));"
         match = re.search(pattern, line, re.IGNORECASE)
         if match:
             line_list.append(line)
             print("// " + line)
 
-            arg1 = int(match.group(1), 16)
+            # arg1 = int(match.group(1), 16)
+            arg1 = float(match.group(1))
             arg2 = 0
             # print(f"{arg1} {arg2}\n")
 
@@ -286,10 +287,13 @@ def wait_spi(wait_time_ms):
     sclk = 1
     mosi = 0
     miso = "X"
+
+    wait_time_ms = wait_time_ms / 1e3
     repeat_num = int(wait_time_ms / tWait)
     time_set_name = 'tWait'
 
-    print(f"// wait_time: {wait_time_ms:d} repeat: {repeat_num:d}")
+    # print(f"// wait_time: {wait_time_ms:d} repeat: {repeat_num:d}")
+    print(f"// wait_time_ms: {wait_time_ms * 1e3} repeat: {repeat_num:d} tWait_ns: {tWait*1e9}")
     out_string = (f'repeat({repeat_num})' + "\t" +
                   time_set_name + "\t" +
                   str(ncs) + "\t" +
@@ -344,6 +348,7 @@ def convert_tcl_to_pattern(file__name):
 
     print('// tset_SPI:', tset_SPI * 1e9, 'nS')
     print('// tRead:', tRead * 1e9, 'nS')
+    print('// tWait:', tWait * 1e9, 'nS')
     print('//NCS\tSCLK\tMOSI\tMISO')
     for cmd in cmd_add_data_list:
         if cmd[0] == 'w':
@@ -379,7 +384,7 @@ if __name__ == '__main__':
         file_name = sys.argv[1]
         pass
     else:
-        file_name = 'TS_test.tcl'
+        file_name = 'BG1_BUF_01_rev1.tcl'
         pass
 
     convert_tcl_to_pattern(file_name)
