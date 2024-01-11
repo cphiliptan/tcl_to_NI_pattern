@@ -1,6 +1,6 @@
 file_format_version 1.1;
 timeset tset_SPI, tRead, tWait;
-pattern .\TS_test(_3, _0, _1, _2)
+pattern TS_test(_3, _0, _1, _2)
 {
 // tset_SPI: 250.0 nS
 // tRead: 100.0 nS

@@ -11,9 +11,9 @@ from io import StringIO
 import sys
 
 cmd_add_data_list = []
-tset_SPI: float = 250e-6
-tRead: float = 100e-6
-tWait: float = 100e-6
+tset_SPI: float = 250e-9
+tRead: float = 100e-9
+tWait: float = 500e-9
 file_format_version: float = 1.1
 timeset = 'tset_SPI, tRead, tWait'
 
@@ -98,7 +98,7 @@ def write_spi(add, m_data):
     miso = "X"
     repeat_num = 2
     time_set_name = 'tset_SPI'
-    out_string = ("\t\t\t" +
+    out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -115,9 +115,9 @@ def write_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (wr_address & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        time_set_name = '\t\t'
-        if bit == 7:
-            time_set_name = 'tset_SPI'
+        # time_set_name = '\t\t'
+        # if bit == 7:
+        time_set_name = 'tset_SPI'
         out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
@@ -136,9 +136,9 @@ def write_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (m_data & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        time_set_name = '\t\t'
-        if bit == 7:
-            time_set_name = 'tset_SPI'
+        # time_set_name = '\t\t'
+        # if bit == 7:
+        time_set_name = 'tset_SPI'
         out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
@@ -165,7 +165,7 @@ def write_spi(add, m_data):
     miso = "X"
     repeat_num = 2
     time_set_name = 'tset_SPI'
-    out_string = ("\t\t\t" +
+    out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -201,7 +201,7 @@ def read_spi(add, m_data):
     miso = "X"
     repeat_num = 2
     time_set_name = 'tset_SPI'
-    out_string = ("\t\t\t" +
+    out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -216,9 +216,9 @@ def read_spi(add, m_data):
     for bit in range(7, -1, -1):  # 7 to 0
         mosi = (wr_address & pow(2, bit)) >> bit
         # NCS SCLK MOSI MISO
-        time_set_name = '\t\t'
-        if bit == 7:
-            time_set_name = 'tset_SPI'
+        # time_set_name = '\t\t'
+        # if bit == 7:
+        time_set_name = 'tset_SPI'
         out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
@@ -242,9 +242,9 @@ def read_spi(add, m_data):
         else:
             miso = 'L'
         # NCS SCLK MOSI MISO
-        time_set_name = '\t\t'
-        if bit == 7:
-            time_set_name = 'tset_SPI'
+        # time_set_name = '\t\t'
+        # if bit == 7:
+        time_set_name = 'tset_SPI'
         out_string = (time_set_name + "\t" +
                       str(ncs) + "\t" +
                       str(sclk) + "\t" +
@@ -271,7 +271,7 @@ def read_spi(add, m_data):
     miso = "X"
     repeat_num = 2
     time_set_name = 'tset_SPI'
-    out_string = ("\t\t\t" +
+    out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -306,7 +306,9 @@ def halt_spi():
     sclk = 1
     mosi = 0
     miso = "X"
+    time_set_name = 'tset_SPI'
     out_string = ('halt' + "\t" +
+                  time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
@@ -340,8 +342,8 @@ def convert_tcl_to_pattern(file__name):
     print(f'timeset {timeset};')
     print(f'pattern {base_name}(_3, _0, _1, _2)' + '\n{')
 
-    print('// tset_SPI:', tset_SPI * 1e6, 'nS')
-    print('// tRead:', tRead * 1e6, 'nS')
+    print('// tset_SPI:', tset_SPI * 1e9, 'nS')
+    print('// tRead:', tRead * 1e9, 'nS')
     print('//NCS\tSCLK\tMOSI\tMISO')
     for cmd in cmd_add_data_list:
         if cmd[0] == 'w':
