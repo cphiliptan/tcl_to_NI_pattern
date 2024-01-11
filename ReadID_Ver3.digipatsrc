@@ -1,0 +1,102 @@
+file_format_version 1.1;
+timeset tset_SPI, tRead, tWait;
+pattern ReadID_Ver3(_3, _0, _1, _2)
+{
+// tset_SPI: 250.0 nS
+// tRead: 100.0 nS
+//NCS	SCLK	MOSI	MISO
+// read address: 0x00
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tRead		0	1	0	X;
+// read data: 0xf1 
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x01
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x01 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x3e
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	0	X;
+tRead		0	1	0	X;
+// read data: 0xfe 
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+// read address: 0x3f
+tset_SPI	1	1	0	X;
+tset_SPI	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tRead		0	1	1	X;
+// read data: 0x0e 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	H;
+tset_SPI	0	0	0	L;
+tset_SPI	0	1	0	X;
+tset_SPI	1	1	0	X;
+halt	tset_SPI	1	1	0	X;
+}
+
