@@ -18,6 +18,8 @@ tWait: float = 500e-9
 file_format_version: float = 1.1
 timeset = 'tset_SPI, tRead, tWait'
 
+tsRad: float = 2e-6
+
 
 def open_file(file_name_):
     print(f'// Opening File: {file_name_}')
@@ -126,13 +128,17 @@ def write_spi(add, m_data):
                       str(mosi) + "\t" +
                       str(miso) + ";")
         print(out_string)
-    # sclk = 1
-    # out_string = ("tRead" + "\t\t" +
-    #               str(ncs) + "\t" +
-    #               str(sclk) + "\t" +
-    #               str(mosi) + "\t" +
-    #               str(miso) + ";")
-    # print(out_string)
+
+    repeat_num = int(tsRad / tRead)
+    sclk = 1
+    out_string = (f'repeat({repeat_num})' + "\t" +
+                  "tRead" + "\t" +
+                  str(ncs) + "\t" +
+                  str(sclk) + "\t" +
+                  str(mosi) + "\t" +
+                  str(miso) + ";")
+    print(out_string)
+
     sclk = 0
     print(f"// write data: 0x{m_data:02x} ")
     for bit in range(7, -1, -1):  # 7 to 0
@@ -227,13 +233,17 @@ def read_spi(add, m_data):
                       str(mosi) + "\t" +
                       str(miso) + ";")
         print(out_string)
+
+    repeat_num = int(tsRad/tRead)
     sclk = 1
-    out_string = ("tRead" + "\t\t" +
+    out_string = (f'repeat({repeat_num})' + "\t" +
+                  "tRead" + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
                   str(miso) + ";")
     print(out_string)
+
     sclk = 0
     mosi = 0
     print(f"// read data: 0x{m_data:02x} ")
@@ -386,7 +396,7 @@ if __name__ == '__main__':
         file_name = sys.argv[1]
         pass
     else:
-        file_name = 'BG1_BUF_01_rev1.tcl'
+        file_name = 'debug_1.tcl'
         pass
 
     convert_tcl_to_pattern(file_name)

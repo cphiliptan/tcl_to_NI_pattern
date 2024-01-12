@@ -1,20 +1,15 @@
 w 3a 5a; # soft reset
 wait 10;
-w 7f 00; # read page #
-r 7f 00; # read page #
 r 00 f1; # read Product ID
-r 03 03; # SPI_CTL0
-
-w 7f 01; # read page #
-r 7f 01; # read page #
-wait 10;
-r 00 f1; # read Product ID
-r 03 1a; # ADC_CTL00
-
-w 7f 02; # read page #
-r 7f 02; # read page #
-wait 10;
-r 00 f1; # read Product ID
-r 10 fc; # 0x210
-r 11 3f; # 0x211
-
+r 58 00; #
+r 59 ff; #
+r 60 ff; #
+r 61 01; #
+r 62 20; #
+r 63 03; #
+r 64 ff; #
+r 65 00; #
+r 7c a5; #
+r 7d 4d; #
+r 7e 74; #
+r 7f 00; #
