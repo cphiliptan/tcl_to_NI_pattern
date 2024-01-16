@@ -19,6 +19,8 @@ file_format_version: float = 1.1
 timeset = 'tset_SPI, tRead, tWait'
 
 tsRad: float = 2e-6
+tsclk_ncs: float = 200e-9
+tsww_tswr: float = 350e-9
 
 
 def open_file(file_name_):
@@ -88,7 +90,7 @@ def write_spi(add, m_data):
     mosi = 0
     miso = "X"
     repeat_num = 2
-    time_set_name = 'tset_SPI'
+    time_set_name = 'tRead'
     out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
@@ -101,7 +103,7 @@ def write_spi(add, m_data):
     mosi = 0
     miso = "X"
     repeat_num = 2
-    time_set_name = 'tset_SPI'
+    time_set_name = 'tRead'
     out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
@@ -158,26 +160,30 @@ def write_spi(add, m_data):
     sclk = 1
     mosi = 0
     miso = "X"
-    repeat_num = 2
-    time_set_name = 'tset_SPI'
-    out_string = (time_set_name + "\t" +
+    repeat_num = int(tsclk_ncs / tRead)
+    time_set_name = 'tRead'
+    out_string = (f'repeat({repeat_num})' + "\t" +
+                  time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
-                  str(miso) + ";")
+                  str(miso) + ";" +
+                  "//tsclk_ncs")
     print(out_string)
 
     ncs = 1
     sclk = 1
     mosi = 0
     miso = "X"
-    repeat_num = 2
-    time_set_name = 'tset_SPI'
-    out_string = (time_set_name + "\t" +
+    repeat_num = int(tsww_tswr / tRead)
+    time_set_name = 'tRead'
+    out_string = (f'repeat({repeat_num})' + "\t" +
+                  time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
-                  str(miso) + ";")
+                  str(miso) + ";" +
+                  "//tsww_tswr")
     print(out_string)
 
 
@@ -195,7 +201,7 @@ def read_spi(add, m_data):
     mosi = 0
     miso = "X"
     repeat_num = 2
-    time_set_name = 'tset_SPI'
+    time_set_name = 'tRead'
     out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
@@ -208,7 +214,7 @@ def read_spi(add, m_data):
     mosi = 0
     miso = "X"
     repeat_num = 2
-    time_set_name = 'tset_SPI'
+    time_set_name = 'tRead'
     out_string = (time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
@@ -234,7 +240,7 @@ def read_spi(add, m_data):
                       str(miso) + ";")
         print(out_string)
 
-    repeat_num = int(tsRad/tRead)
+    repeat_num = int(tsRad / tRead)
     sclk = 1
     out_string = (f'repeat({repeat_num})' + "\t" +
                   "tRead" + "\t" +
@@ -268,26 +274,30 @@ def read_spi(add, m_data):
     sclk = 1
     mosi = 0
     miso = "X"
-    repeat_num = 2
-    time_set_name = 'tset_SPI'
-    out_string = (time_set_name + "\t" +
+    repeat_num = int(tsclk_ncs / tRead)
+    time_set_name = 'tRead'
+    out_string = (f'repeat({repeat_num})' + "\t" +
+                  time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
-                  str(miso) + ";")
+                  str(miso) + ";" +
+                  "//tsclk_ncs")
     print(out_string)
 
     ncs = 1
     sclk = 1
     mosi = 0
     miso = "X"
-    repeat_num = 2
-    time_set_name = 'tset_SPI'
-    out_string = (time_set_name + "\t" +
+    repeat_num = int(tsww_tswr / tRead)
+    time_set_name = 'tRead'
+    out_string = (f'repeat({repeat_num})' + "\t" +
+                  time_set_name + "\t" +
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
-                  str(miso) + ";")
+                  str(miso) + ";" +
+                  "//tsww_tswr")
     print(out_string)
 
 
@@ -304,7 +314,7 @@ def wait_spi(wait_time_ms):
     time_set_name = 'tWait'
 
     # print(f"// wait_time: {wait_time_ms:d} repeat: {repeat_num:d}")
-    print(f"// wait_time_ms: {wait_time_ms * 1e3} repeat: {repeat_num:d} tWait_ns: {tWait*1e9}")
+    print(f"// wait_time_ms: {wait_time_ms * 1e3} repeat: {repeat_num:d} tWait_ns: {tWait * 1e9}")
     out_string = (f'repeat({repeat_num})' + "\t" +
                   time_set_name + "\t" +
                   str(ncs) + "\t" +
@@ -402,6 +412,5 @@ if __name__ == '__main__':
     convert_tcl_to_pattern(file_name)
 
     pass
-
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
