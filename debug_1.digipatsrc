@@ -17,7 +17,7 @@ tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
-repeat(20)	tRead	0	1	0	X;
+repeat(5)	tRead	0	1	0	X;
 // write data: 0x5a 
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
@@ -29,8 +29,10 @@ tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 repeat(2)	tRead	0	1	0	X;//tsclk_ncs
 repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 // wait_time_ms: 10.0 repeat: 20000 tWait_ns: 500.0
 repeat(20000)	tWait	1	1	0	X;
+
 // read address: 0x00
 tRead	1	1	0	X;
 tRead	0	1	0	X;
@@ -54,6 +56,79 @@ tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	H;
 repeat(2)	tRead	0	1	0	X;//tsclk_ncs
 repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
+// read address: 0x7f
+tRead	1	1	0	X;
+tRead	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+repeat(20)	tRead	0	1	1	X;
+// read data: 0x00 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
+// write to address: 0x7f | 0x80
+tRead	1	1	0	X;
+tRead	0	1	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+repeat(5)	tRead	0	1	1	X;
+// write data: 0x01 
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
+// read address: 0x7f
+tRead	1	1	0	X;
+tRead	0	1	0	X;
+tset_SPI	0	0	0	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+tset_SPI	0	0	1	X;
+repeat(20)	tRead	0	1	1	X;
+// read data: 0x01 
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	L;
+tset_SPI	0	0	0	H;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 halt	tset_SPI	1	1	0	X;
 }
 

@@ -18,6 +18,7 @@ tWait: float = 500e-9
 file_format_version: float = 1.1
 timeset = 'tset_SPI, tRead, tWait'
 
+tsWrRad: float = 500e-9
 tsRad: float = 2e-6
 tsclk_ncs: float = 200e-9
 tsww_tswr: float = 350e-9
@@ -131,7 +132,7 @@ def write_spi(add, m_data):
                       str(miso) + ";")
         print(out_string)
 
-    repeat_num = int(tsRad / tRead)
+    repeat_num = int(tsWrRad / tRead)
     sclk = 1
     out_string = (f'repeat({repeat_num})' + "\t" +
                   "tRead" + "\t" +
@@ -183,7 +184,7 @@ def write_spi(add, m_data):
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
                   str(miso) + ";" +
-                  "//tsww_tswr")
+                  "//tsww_tswr" + "\n")
     print(out_string)
 
 
@@ -297,7 +298,7 @@ def read_spi(add, m_data):
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
                   str(miso) + ";" +
-                  "//tsww_tswr")
+                  "//tsww_tswr" + "\n")
     print(out_string)
 
 
@@ -320,7 +321,7 @@ def wait_spi(wait_time_ms):
                   str(ncs) + "\t" +
                   str(sclk) + "\t" +
                   str(mosi) + "\t" +
-                  str(miso) + ";")
+                  str(miso) + ";" + "\n")
     print(out_string)
 
 
