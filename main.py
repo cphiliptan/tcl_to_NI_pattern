@@ -10,6 +10,7 @@ import os
 from io import StringIO
 import sys
 from pathlib import Path
+import glob
 
 cmd_add_data_list = []
 tset_SPI: float = 250e-9
@@ -33,7 +34,7 @@ def open_file(file_name_):
     count = 0
 
     line_list = []
-    # cmd_add_data_list = []
+    cmd_add_data_list.clear()
 
     # Strips the newline character
     for line in all_lines:
@@ -405,12 +406,18 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         print(sys.argv[1])
         file_name = sys.argv[1]
+        convert_tcl_to_pattern(file_name)
         pass
     else:
-        file_name = 'debug_1.tcl'
+        # file_name = 'debug_1.tcl'
+        extension = "tcl"
+        files_list = glob.glob(f"*.{extension}")
+        print(files_list)
+        for fnames in files_list:
+            convert_tcl_to_pattern(fnames)
         pass
 
-    convert_tcl_to_pattern(file_name)
+    # convert_tcl_to_pattern(file_name)
 
     pass
 

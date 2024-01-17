@@ -7,8 +7,8 @@ pattern BG1_BUF_01_rev1(_3, _0, _1, _2)
 // tWait: 500.0 nS
 //NCS	SCLK	MOSI	MISO
 // write to address: 0x3a | 0x80
-tset_SPI	1	1	0	X;
-tset_SPI	0	1	0	X;
+tRead	1	1	0	X;
+tRead	0	1	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
@@ -17,6 +17,7 @@ tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
+repeat(5)	tRead	0	1	0	X;
 // write data: 0x5a 
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
@@ -26,13 +27,15 @@ tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
-tset_SPI	0	1	0	X;
-tset_SPI	1	1	0	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 // wait_time_ms: 10.0 repeat: 20000 tWait_ns: 500.0
 repeat(20000)	tWait	1	1	0	X;
+
 // write to address: 0x32 | 0x80
-tset_SPI	1	1	0	X;
-tset_SPI	0	1	0	X;
+tRead	1	1	0	X;
+tRead	0	1	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
@@ -41,6 +44,7 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
+repeat(5)	tRead	0	1	0	X;
 // write data: 0x21 
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
@@ -50,11 +54,12 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
-tset_SPI	0	1	0	X;
-tset_SPI	1	1	0	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 // read address: 0x32
-tset_SPI	1	1	0	X;
-tset_SPI	0	1	0	X;
+tRead	1	1	0	X;
+tRead	0	1	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
@@ -63,7 +68,7 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
-tRead		0	1	0	X;
+repeat(20)	tRead	0	1	0	X;
 // read data: 0x21 
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
@@ -73,8 +78,9 @@ tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	H;
-tset_SPI	0	1	0	X;
-tset_SPI	1	1	0	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 halt	tset_SPI	1	1	0	X;
 }
 

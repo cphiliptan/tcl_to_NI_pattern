@@ -4,10 +4,11 @@ pattern TS_test_123(_3, _0, _1, _2)
 {
 // tset_SPI: 250.0 nS
 // tRead: 100.0 nS
+// tWait: 500.0 nS
 //NCS	SCLK	MOSI	MISO
 // write to address: 0x7f | 0x80
-tset_SPI	1	1	0	X;
-tset_SPI	0	1	0	X;
+tRead	1	1	0	X;
+tRead	0	1	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	1	X;
@@ -16,6 +17,7 @@ tset_SPI	0	0	1	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	1	X;
+repeat(5)	tRead	0	1	1	X;
 // write data: 0x00 
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
@@ -25,11 +27,12 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
-tset_SPI	0	1	0	X;
-tset_SPI	1	1	0	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 // write to address: 0x15 | 0x80
-tset_SPI	1	1	0	X;
-tset_SPI	0	1	0	X;
+tRead	1	1	0	X;
+tRead	0	1	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
@@ -38,6 +41,7 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
+repeat(5)	tRead	0	1	1	X;
 // write data: 0x01 
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
@@ -47,11 +51,12 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	1	X;
-tset_SPI	0	1	0	X;
-tset_SPI	1	1	0	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
 // read address: 0x00
-tset_SPI	1	1	0	X;
-tset_SPI	0	1	0	X;
+tRead	1	1	0	X;
+tRead	0	1	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
@@ -60,7 +65,7 @@ tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
 tset_SPI	0	0	0	X;
-tRead		0	1	0	X;
+repeat(20)	tRead	0	1	0	X;
 // read data: 0xf1 
 tset_SPI	0	0	0	H;
 tset_SPI	0	0	0	H;
@@ -70,10 +75,12 @@ tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	L;
 tset_SPI	0	0	0	H;
-tset_SPI	0	1	0	X;
-tset_SPI	1	1	0	X;
-// wait_time: 1 repeat: 10000
-repeat(10000)	tWait	1	1	0	X;
+repeat(2)	tRead	0	1	0	X;//tsclk_ncs
+repeat(3)	tRead	1	1	0	X;//tsww_tswr
+
+// wait_time_ms: 1.0 repeat: 2000 tWait_ns: 500.0
+repeat(2000)	tWait	1	1	0	X;
+
 halt	tset_SPI	1	1	0	X;
 }
 
